@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import AddRecipeBtn from './AddRecipeBtn';
+import RecipesList from './RecipesList';
 
 class Sidebar extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Sidebar extends Component {
         <div>
           <AddRecipeBtn />
         </div>
+        <RecipesList />
       </Grid>
     );
   }
