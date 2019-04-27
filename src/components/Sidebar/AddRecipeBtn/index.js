@@ -9,7 +9,7 @@ class AddRecipeBtn extends Component {
   }
   render() {
     return (
-      <Button variant="outlined" color="primary">
+      <Button variant="outlined" color="primary" onClick={this.props.onClick}>
         <AddIcon color="primary" />
         Add New Recipe
       </Button>
