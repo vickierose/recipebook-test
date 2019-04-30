@@ -5,17 +5,19 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DishIcon from '@material-ui/icons/RoomService'
 
+import {parse, format} from 'date-fns';
+
 import './styles.scss';
 
-const RecipesListItem = () => (
+const RecipesListItem = ({id, recipe}) => (
   <ListItem >
-    <Link to="/1" className="recipes-list-item-link">
+    <Link to={`/${id}`} className="recipes-list-item-link">
       <ListItemIcon>
         <DishIcon />
       </ListItemIcon>
       <ListItemText 
-        primary="Recipe name"
-        secondary="13/04/2019"
+        primary={recipe.name}
+        secondary={format(parse(recipe.createdAt), 'D/MM/YYYY')}
       />
     </Link>
   </ListItem>

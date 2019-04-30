@@ -6,6 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Sidebar from './components/Sidebar'
 import Main from './components/Main';
 
+import {getRecipes} from './redux/actions/recipes';
+
 const styles = theme => ({
   root: {
     margin: theme.spacing.unit,
@@ -16,6 +18,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {  };
+  }
+  componentDidMount() {
+    this.props.getRecipes()
   }
   render() {
     return (
@@ -29,4 +34,8 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+const actions = {
+  getRecipes,
+}
+
+export default withStyles(styles)(connect(null, actions)(App));
