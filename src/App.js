@@ -17,8 +17,13 @@ const styles = theme => ({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = {
+      isSidebarOpen: false,
+    };
   }
+  handleSidebarToggle = (open) => {
+    this.setState(state => ({ isSidebarOpen: open }));
+  };
   componentDidMount() {
     this.props.getRecipes()
   }
@@ -26,7 +31,7 @@ class App extends Component {
     return (
       <Router>
         <Grid container className={this.props.classes.root}>
-          <Sidebar />
+          <Sidebar isOpen={this.state.isSidebarOpen} onToggle={this.handleSidebarToggle}/>
           <Main />
         </Grid>
       </Router>

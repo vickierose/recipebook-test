@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import HistoryIcon from '@material-ui/icons/History';
@@ -11,6 +10,7 @@ import RecipeModal from '../../common/RecipeModal';
 import HistoryModal from './HistoryModal';
 
 import {getRecipe, modifyRecipe} from '../../../redux/actions/selectedRecipe';
+import { getRecipes } from '../../../redux/actions/recipes';
 
 const styles = theme => ({
   chip: {
@@ -35,8 +35,9 @@ class RecipePage extends Component {
     this.setState({[modalStateName]: false})
   }
   saveRecipe = (data) => {
-    const {modifyRecipe, match} = this.props;
+    const {modifyRecipe, match, getRecipes} = this.props;
     modifyRecipe(match.params.id, data)
+    .then(() => getRecipes())
   }
   componentDidMount() {
     const {getRecipe, match} = this.props;
@@ -59,15 +60,6 @@ class RecipePage extends Component {
               <Typography variant="h5" paragraph>
                 {data.latest.name}
               </Typography>
-              
-              {/* <div className="margin-b-20">
-                <Typography variant="h6">Ingredients</Typography>
-                <Chip label="Ingridient - 100g" className={classes.chip} variant="outlined" color="primary" />
-                <Chip label="Ingridient - 100g" className={classes.chip} variant="outlined" color="primary" />
-                <Chip label="Ingridient - 100g" className={classes.chip} variant="outlined" color="primary" />
-                <Chip label="Ingridient - 100g" className={classes.chip} variant="outlined" color="primary" />
-                <Chip label="Ingridient - 100g" className={classes.chip} variant="outlined" color="primary" />
-              </div> */}
 
               <Typography variant="h6">Description</Typography>
               <Typography variant="body1" paragraph>
@@ -122,6 +114,7 @@ const mapstateToProps = state => ({
 const actions = {
   getRecipe,
   modifyRecipe,
+  getRecipes
 }
 
 export default withStyles(styles)(connect(mapstateToProps, actions)(RecipePage));
