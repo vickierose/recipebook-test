@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -16,25 +16,25 @@ class HistoryModal extends Component {
     this.state = {  };
   }
   render() {
+    const {versions, open, handleClose} = this.props
     return (
       <Dialog
-        open={this.props.open}
-        onClose={this.props.handleClose}
+        open={open}
+        onClose={handleClose}
       >
         <DialogTitle>Previous versions</DialogTitle>
         <DialogContent>
           <List>
-            <HistoryItem />
-            <Divider />
-            <HistoryItem />
-            <Divider />
-            <HistoryItem />
-            <Divider />
-            <HistoryItem />
+            {versions.map((version, index) => (
+              <Fragment key={index}>
+                <HistoryItem versionData={version}/>
+                {index !== versions.length-1 ? <Divider /> : null}
+              </Fragment>
+            ))}
           </List>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.handleClose} color="primary">
+          <Button onClick={handleClose} color="primary">
             Close
           </Button>
         </DialogActions>

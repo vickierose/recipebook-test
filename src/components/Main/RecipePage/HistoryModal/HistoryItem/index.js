@@ -2,20 +2,19 @@ import React, {Fragment} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import {format} from 'date-fns';
 
-const HistoryItem = (props) => (
+const HistoryItem = ({versionData}) => (
   <ListItem>
     <ListItemText
       disableTypography
-      primary={<Typography variant="h6">Version from 13/04/2019</Typography>}
+      primary={<Typography variant="h6">{`Version from ${format(versionData.createdAt, 'H:mm D/MM/YYYY')}`}</Typography>}
       secondary={
         <Fragment>
-          <Typography variant="overline">Recipe Name</Typography>
+          <Typography variant="overline">{versionData.name}</Typography>
           <Typography variant="subtitle2">Description</Typography>
           <Typography variant="body1" paragraph>
-            body1. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur
-            unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam
-            dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.
+            {versionData.description}
           </Typography>
         </Fragment>
       }

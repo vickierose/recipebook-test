@@ -15,11 +15,27 @@ class RecipeModal extends Component {
       recipeDescription: this.props.recipeDescription || '',
     };
   }
+  closeModal = () => {
+    this.setState({
+      recipeName: this.props.recipeName || '',
+      recipeDescription: this.props.recipeDescription || '',
+    })
+    this.props.handleClose()
+  }
+  saveChanges = () => {
+    if(
+      this.state.recipeName && this.state.recipeDescription &&
+      (this.state.recipeName !== this.props.recipeName ||
+      this.state.recipeDescription !==this.props.recipeDescription)
+      ) this.props.handleSave({name: this.state.recipeName, description: this.state.recipeDescription});
+      this.closeModal();
+  }
+  changeField = fieldName => e => this.setState({[fieldName]: e.target.value})
   render() {
     return (
       <Dialog
         open={this.props.open}
-        onClose={this.props.handleClose}
+        onClose={this.closeModal}
       >
         <DialogTitle>{this.props.modalTitle}</DialogTitle>
         <DialogContent>
@@ -28,23 +44,26 @@ class RecipeModal extends Component {
             variant="outlined"
             margin="dense"
             label="Recipe Name"
+            value={this.state.recipeName}
+            onChange={this.changeField("recipeName")}
             fullWidth
           />
           <TextField
-            autoFocus
             multiline
             rows={6}
             variant="outlined"
             margin="dense"
             label="Description"
+            value={this.state.recipeDescription}
+            onChange={this.changeField("recipeDescription")}
             fullWidth
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.handleClose} color="primary">
+          <Button onClick={this.closeModal} color="primary">
             Cancel
           </Button>
-          <Button onClick={this.props.handleClose} color="primary">
+          <Button onClick={this.saveChanges} color="primary">
             {this.props.saveText}
           </Button>
         </DialogActions>
