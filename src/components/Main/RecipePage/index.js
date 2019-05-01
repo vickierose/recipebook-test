@@ -11,9 +11,10 @@ import HistoryModal from './HistoryModal';
 
 import {getRecipe, modifyRecipe} from '../../../redux/actions/selectedRecipe';
 import { getRecipes } from '../../../redux/actions/recipes';
+import { AST_ClassExpression } from 'terser';
 
 const styles = theme => ({
-  chip: {
+  root: {
     margin: theme.spacing.unit,
   },
   button: {
@@ -51,7 +52,7 @@ class RecipePage extends Component {
     const {classes, recipe} = this.props;
     const {data, loading} = recipe;
     return (
-      <div>
+      <div className={classes.root}>
         {
           loading || !Object.keys(data).length ?
           <CircularProgress /> :

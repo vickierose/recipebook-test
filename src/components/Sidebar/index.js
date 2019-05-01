@@ -18,12 +18,6 @@ const styles = theme => ({
       flexShrink: 0,
     },
   },
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
   drawerPaper: {
     width: drawerWidth,
     border: 'none',
